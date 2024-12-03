@@ -1,0 +1,17 @@
+---
+import ArtworkCard from './ArtworkCard.astro';
+import type { Artwork } from '../data/artworks';
+
+interface Props {
+  artworks: Artwork[];
+  columns?: number;
+}
+
+const { artworks, columns = 2 } = Astro.props;
+---
+
+<div class={`grid grid-cols-1 md:grid-cols-${columns} gap-8`}>
+  {artworks.map(artwork => (
+    <ArtworkCard {...artwork} />
+  ))}
+</div>

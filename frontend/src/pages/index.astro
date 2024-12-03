@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import ArtworkGrid from '../components/ArtworkGrid.astro';
+import ViewAllButton from '../components/ViewAllButton.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import { getFeaturedArtworks, type Artwork } from '../data/artworks';
+import type { SanityDocument } from "@sanity/client";
+import { sanityClient } from "sanity:client";
+
+
+const ARTWORKS_QUERY = `*[_type == "artwork"] { 
+    "id": _id,
+    title,
+    description,
+    inspiration,
+    sold,
+    "createdAt": _createdAt,
+    "image": image.asset->url 
+}`;
+
+const allArtworks = await sanityClient.fetch<SanityDocument[]>(ARTWORKS_QUERY) as unknown as Artwork[];
+
+const featuredArtworks = allArtworks.slice(0, 4);
+---
+
+<Layout title="Artist Portfolio">
+  <Navigation />
+  <Hero />
+  
+  <section id="gallery" class="py-20">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold mb-12 text-center">Featured Works</h2>
+      <ArtworkGrid artworks={featuredArtworks} />
+      <ViewAllButton />
+    </div>
+  </section>
+
+  <About />
+  <Contact />
+
+  <footer class="bg-black text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p>&copy; {new Date().getFullYear()} Artist Name. All rights reserved.</p>
+    </div>
+  </footer>
+</Layout>
