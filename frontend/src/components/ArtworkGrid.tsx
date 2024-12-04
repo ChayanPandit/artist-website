@@ -74,7 +74,7 @@ const ArtworkGrid: React.FC<ArtworkGridProps> = ({ artworks, columns = 4, galler
                 animate={{ opacity: 1, y: 0 }} 
                 transition={{ delay: (4 * index + columnIndex ) * 0.2, duration: 0.4 }}
               >
-                <ArtworkCard {...artwork} />
+                <ArtworkCard artwork={artwork} />
               </motion.div>
             ))}
           </div>

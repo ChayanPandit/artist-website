@@ -3,7 +3,7 @@ export interface Artwork {
   title: string;
   image: string;
   description: string;
-  year: string;
+  inspiration: string;
   category: string;
   dimensions?: string;
   medium?: string;
