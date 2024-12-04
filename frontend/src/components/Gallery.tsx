@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import FilterBar from "./FilterBar";
 import ArtworkGrid from "./ArtworkGrid";
 import type { Artwork } from "../data/artworks";
@@ -10,6 +10,7 @@ interface GalleryProps {
 
 const Gallery: React.FC<GalleryProps> = ({ artworks }) => {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   const tags = artworks.map((art) => art.tags).flat().filter((tag): tag is string => !!tag);
   const uniqueTags = [...new Set(tags)];
@@ -19,7 +20,7 @@ const Gallery: React.FC<GalleryProps> = ({ artworks }) => {
     : artworks;
 
   return (
-    <section id="gallery" className="py-20">
+    <section ref={galleryRef} id="gallery" className="py-20">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-8 text-center">Gallery</h2>
         <FilterBar
@@ -27,7 +28,7 @@ const Gallery: React.FC<GalleryProps> = ({ artworks }) => {
           selectedTag={selectedTag}
           onTagSelect={(tag: string | null) => setSelectedTag(tag)}
         />
-        <ArtworkGrid artworks={filteredArtworks}/>
+        <ArtworkGrid artworks={filteredArtworks} galleryRef={galleryRef} />
       </div>
     </section>
   );
