@@ -45,5 +45,20 @@ export const artworkType = defineType({
       title: 'Created At',
       initialValue: () => new Date().toISOString(),
     }),
+    defineField({
+      name: 'tags',
+      type: 'array',
+      title: 'Tags',
+      of: [{type: 'string' }],
+      options: {
+        list: [
+          {title: 'CONTEMPORARY', value: 'contemporary'},
+          {title: 'ABSTRACT', value: 'abstract'},
+          {title: 'BLACK & WHITE', value: 'b&w'},
+          {title: 'LIFE', value: 'life'},
+          {title: 'MISC', value: 'misc'}
+        ]
+      }
+    }),
   ],
 })
