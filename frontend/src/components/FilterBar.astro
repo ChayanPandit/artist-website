@@ -1,0 +1,12 @@
+---
+const filters = ["ALL", "CONTEMPORARY", "ABSTRACT", "BLACK & WHITE", "GEOMETRY", "MISC"];
+---
+
+
+<div class="flex justify-center gap-6 mb-8">
+  {filters.map(filter => (
+    <button class="px-4 py-2 text-gray-400 hover:text-gray-800 rounded">
+      {filter}
+    </button>
+  ))}
+</div>

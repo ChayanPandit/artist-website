@@ -7,11 +7,21 @@ interface Props {
   columns?: number;
 }
 
-const { artworks, columns = 2 } = Astro.props;
+const { artworks, columns = 4 } = Astro.props;
+
+const distributedColumns: Artwork[][]  = Array.from({ length: columns }, () => []);
+artworks.forEach((artwork, index) => {
+  distributedColumns[index % columns].push(artwork);
+});
+
 ---
 
-<div class={`grid grid-cols-1 md:grid-cols-${columns} gap-8`}>
-  {artworks.map(artwork => (
-    <ArtworkCard {...artwork} />
+<div class={`grid grid-cols-${columns/2} md:grid-cols-${columns} gap-1`}>
+  {distributedColumns.map((column, columnIndex) => (
+    <div class="flex flex-col gap-1">
+      {column.map(artwork => (
+        <ArtworkCard {...artwork} />
+      ))}
+    </div>
   ))}
 </div>

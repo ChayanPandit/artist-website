@@ -1,28 +1,23 @@
 ---
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "About", href: "/#about" },
-  { label: "Contact", href: "/#contact" }
+  { label: "HOME", href: "/" },
+  { label: "GALLERY", href: "/#gallery" },
+  { label: "ABOUT", href: "/#about" },
+  { label: "CONTACT", href: "/#contact" }
 ];
 ---
 
-<nav class="fixed w-full bg-white/90 backdrop-blur-sm z-50 py-4">
-  <div class="container mx-auto px-4">
-    <div class="flex justify-between items-center">
-      <a href="/" class="text-2xl font-bold font-heading">Artist Name</a>
-      <ul class="flex gap-8">
-        {navItems.map(item => (
-          <li>
-            <a 
-              href={item.href} 
-              class="text-gray-600 hover:text-black transition-colors"
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </div>
+<nav class="py-2 border-b border-gray-100 text-sm">
+  <ul class="flex justify-center gap-6">
+    {navItems.map(item => (
+      <li>
+        <a 
+          href={item.href} 
+          class="text-gray-400 hover:text-black transition"
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
 </nav>
