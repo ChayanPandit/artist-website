@@ -16,7 +16,7 @@ artworks.forEach((artwork, index) => {
 
 ---
 
-<div class={`grid grid-cols-${columns/2} md:grid-cols-${columns} gap-1`}>
+<div class={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1`}>
   {distributedColumns.map((column, columnIndex) => (
     <div class="flex flex-col gap-1">
       {column.map(artwork => (

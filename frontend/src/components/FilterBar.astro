@@ -3,9 +3,9 @@ const filters = ["ALL", "CONTEMPORARY", "ABSTRACT", "BLACK & WHITE", "GEOMETRY",
 ---
 
 
-<div class="flex justify-center gap-6 mb-8">
+<div class="flex justify-center mb-8 max-w-2xl mx-auto text-center text-xs sm:text-sm md:text-base whitespace-nowrap">
   {filters.map(filter => (
-    <button class="px-4 py-2 text-gray-400 hover:text-gray-800 rounded">
+    <button class="px-1.5 sm:px-4 py-2 text-gray-400 hover:text-gray-800 rounded">
       {filter}
     </button>
   ))}
