@@ -45,8 +45,8 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork }) => {
 
             <div className="w-full md:w-3/5 h-auto flex items-center justify-center">
               <InnerImageZoom
-                src={`${image}?sharp=30&fit=clip&w=1000&h=900`}
-                zoomSrc={`${image}?sharp=40&q=100`}
+                src={`${image}?sharp=30&fit=clip&w=900&h=700&q=80`}
+                zoomSrc={`${image}?sharp=60&q=100`}
                 hasSpacer
                 zoomPreload
               />
