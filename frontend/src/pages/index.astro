@@ -29,7 +29,7 @@ const featuredArtworks = allArtworks.slice(0, 4);
 <Layout title="Artist Portfolio">
   <Navigation />  
   <Hero/>
-  <Gallery artworks={allArtworks} client:visible/>
+  <Gallery artworks={allArtworks} client:load/>
   <About/>
   <Contact/>
   <Footer/>
