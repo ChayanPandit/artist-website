@@ -5,7 +5,7 @@ import Hero from '../components/Hero.astro';
 import { type Artwork } from '../data/artworks';
 import type { SanityDocument } from "@sanity/client";
 import { sanityClient } from "sanity:client";
-import Gallery from '../components/Gallery.astro';
+import Gallery from '../components/Gallery';
 import Footer from '../components/Footer.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
@@ -18,19 +18,20 @@ const ARTWORKS_QUERY = `*[_type == "artwork"] {
     inspiration,
     sold,
     "createdAt": _createdAt,
-    "image": image.asset->url 
-}`;
+    "image": image.asset->url,
+    tags
+} | order(_createdAt asc)`;
 
 const allArtworks = await sanityClient.fetch<SanityDocument[]>(ARTWORKS_QUERY) as unknown as Artwork[];
-
 const featuredArtworks = allArtworks.slice(0, 4);
 ---
 
 <Layout title="Artist Portfolio">
   <Navigation />  
   <Hero/>
-  <Gallery artworks={allArtworks}/>
+  <Gallery artworks={allArtworks} client:visible/>
   <About/>
   <Contact/>
   <Footer/>
 </Layout>
+
