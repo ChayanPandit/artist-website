@@ -52,11 +52,11 @@ export const artworkType = defineType({
       of: [{type: 'string' }],
       options: {
         list: [
-          {title: 'CONTEMPORARY', value: 'contemporary'},
-          {title: 'ABSTRACT', value: 'abstract'},
-          {title: 'BLACK & WHITE', value: 'b&w'},
-          {title: 'LIFE', value: 'life'},
-          {title: 'MISC', value: 'misc'}
+          {title: 'CONTEMPORARY', value: 'CONTEMPORARY'},
+          {title: 'ABSTRACT', value: 'ABSTRACT'},
+          {title: 'BLACK & WHITE', value: 'BLACK & WHITE'},
+          {title: 'LIFE', value: 'LIFE'},
+          {title: 'MISC', value: 'MISC'}
         ]
       }
     }),
