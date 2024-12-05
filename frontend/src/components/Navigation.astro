@@ -7,7 +7,10 @@ const navItems = [
 ];
 ---
 
-<nav class="py-2 border-b border-gray-100 text-sm">
+  <nav 
+  id="navbar" 
+  class="fixed top-0 w-full py-2 border-b border-gray-100 text-sm bg-white shadow transition-transform duration-300 -translate-y-full z-20">
+
   <ul class="flex justify-center gap-6">
     {navItems.map(item => (
       <li>
@@ -21,3 +24,24 @@ const navItems = [
     ))}
   </ul>
 </nav>
+
+
+<script>
+  let lastScrollY = 0;
+
+  const navbar = document.getElementById('navbar');
+
+  window.addEventListener('scroll', () => {
+    if (!navbar) return;
+    
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY < lastScrollY) {
+      navbar.style.transform = "translateY(0)";
+    } else {
+      navbar.style.transform = "translateY(-100%)";
+    }
+
+    lastScrollY = currentScrollY;
+  });
+</script>

@@ -35,6 +35,18 @@ const { title, description = "Artist portfolio showcasing original artworks" } =
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
   }
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(131, 119, 119, 0.3);
+  }
+  ::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(131, 119, 119, 0.3);
+  }
 </style>
 
 
