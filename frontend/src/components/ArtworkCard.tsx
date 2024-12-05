@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { Artwork } from "../data/artworks";
+import type { Artwork } from "../types/artworks";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 

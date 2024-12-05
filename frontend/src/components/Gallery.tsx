@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import FilterBar from "./FilterBar";
 import ArtworkGrid from "./ArtworkGrid";
-import type { Artwork } from "../data/artworks";
+import type { Artwork } from "../types/artworks";
 
 
 interface GalleryProps {

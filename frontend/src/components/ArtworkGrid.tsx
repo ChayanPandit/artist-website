@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import type { Artwork } from "../data/artworks";
+import type { Artwork } from "../types/artworks";
 import ArtworkCard from "./ArtworkCard";
 
 interface ArtworkGridProps {
