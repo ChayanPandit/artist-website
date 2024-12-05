@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { Artwork } from "../types/artworks";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
@@ -10,6 +10,14 @@ interface ArtworkCardProps {
 const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork }) => {
   const { image, title, description, inspiration, tags } = artwork;
   const [isOpen, setIsOpen] = useState(false);
+  const [screenDimensions, setScreenDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const width = Math.floor(window.innerWidth * 0.8);
+    const height = Math.floor(window.innerHeight * 0.9);
+    setScreenDimensions({ width, height });
+  }, []);
+
 
   return (
     <>
@@ -33,7 +41,7 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork }) => {
           onClick={() => setIsOpen(false)} 
         >
           <div
-            className="flex flex-col gap-2 md:flex-row bg-white rounded-lg w-auto h-auto max-w-6xl max-h-screen p-4 relative m-4 overflow-y-auto"
+            className="flex flex-col gap-2 md:flex-row bg-white rounded-lg w-auto h-auto max-w-full max-h-screen p-4 relative m-4 overflow-y-auto"
             onClick={(e) => e.stopPropagation()} 
           >
             <button
@@ -45,7 +53,7 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork }) => {
 
             <div className="w-full md:w-3/5 h-auto flex items-center justify-center">
               <InnerImageZoom
-                src={`${image}?sharp=30&fit=clip&w=900&h=700&q=80`}
+                src={`${image}?sharp=30&fit=clip&w=${screenDimensions.width}&h=${screenDimensions.height}&q=80`}
                 zoomSrc={`${image}?sharp=60&q=100`}
                 hasSpacer
                 zoomPreload
