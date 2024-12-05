@@ -23,7 +23,6 @@ const ARTWORKS_QUERY = `*[_type == "artwork"] {
 } | order(_createdAt asc)`;
 
 const allArtworks = await sanityClient.fetch<SanityDocument[]>(ARTWORKS_QUERY) as unknown as Artwork[];
-const featuredArtworks = allArtworks.slice(0, 4);
 ---
 
 <Layout title="Artist Portfolio">

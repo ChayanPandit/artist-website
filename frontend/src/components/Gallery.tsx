@@ -19,8 +19,16 @@ const Gallery: React.FC<GalleryProps> = ({ artworks }) => {
     ? artworks.filter((art) => art.tags?.includes(selectedTag))
     : artworks;
 
+  const shuffle = (array: string[]) => { 
+    return array.map((a) => ({ sort: Math.random(), value: a }))
+      .sort((a, b) => a.sort - b.sort)
+      .map((a) => a.value); 
+  }; 
+  
+  const artworkImages = JSON.stringify(shuffle(artworks.map((art) => art.image)).splice(0, 3)); 
+
   return (
-    <section ref={galleryRef} id="gallery" className="py-20 max-w-7xl mx-auto">
+    <section ref={galleryRef} id="gallery" className="py-20 max-w-7xl mx-auto" data-images={artworkImages}>
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-8 text-center">Gallery</h2>
         <FilterBar

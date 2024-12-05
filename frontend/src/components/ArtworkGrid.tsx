@@ -18,7 +18,7 @@ const ArtworkGrid: React.FC<ArtworkGridProps> = ({ artworks, columns = 4, galler
   }, [artworks]);
 
   useEffect(() => {
-    if (galleryRef.current) {
+    if (galleryRef.current && currentPage > 1) {
       galleryRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentPage]);
