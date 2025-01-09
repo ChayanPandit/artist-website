@@ -57,6 +57,8 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork }) => {
                 zoomSrc={`${image}?sharp=60&q=100`}
                 hasSpacer
                 zoomPreload
+                fullscreenOnMobile
+                mobileBreakpoint={1080}
               />
             </div>
 

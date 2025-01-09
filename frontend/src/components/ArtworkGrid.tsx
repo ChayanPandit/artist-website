@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import type { Artwork } from "../types/artworks";
 import ArtworkCard from "./ArtworkCard";
