@@ -1,0 +1,88 @@
+---
+import type { Achievement } from "../types/achievements";
+
+const {achievements} = Astro.props;
+console.log(achievements)
+---
+<section id="achievements" class="py-20 max-w-5xl mx-auto" data-achievementslength={achievements.length.toString()}>
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold mb-12 text-center">Achievements</h2>
+    <div class="relative w-full overflow-hidden rounded-xl">
+      <div id="carousel" class="flex transition-transform duration-500">
+        {achievements.map((achievement: Achievement) => (
+          <div 
+            id={achievement.id} 
+            class="min-w-full flex-shrink-0 relative bg-white rounded-xl shadow-lg overflow-hidden text-center"
+          >
+            <div class="relative group">
+              <img 
+                src={achievement.image} 
+                alt={achievement.title} 
+                class="w-full h-64 md:h-96 object-cover transition-transform duration-300"
+              />
+              <div 
+                class="absolute bottom-0 left-0 right-0 text-white p-4 z-10"
+              >
+                <h3 class="text-lg font-semibold transform opacity-80 group-hover:opacity-0 duration-200 group-hover:translate-y-[1rem]">
+                  {achievement.title}
+                </h3>
+              </div>
+              <div 
+                class="absolute bottom-0 left-0 right-0 text-white p-4 transition-all duration-500 group-hover:h-auto bg-gradient-to-t from-black to-transparent"
+              >
+                <h3 class="text-lg font-semibold opacity-0 group-hover:opacity-100 transform translate-y-0 group-hover:translate-y-[-1rem] transition-transform duration-500 ease-out">
+                  {achievement.title}
+                </h3>
+                <p 
+                  class="text-sm opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 overflow-hidden max-h-40 md:max-h-64 overflow-y-auto transition-all duration-500 ease-out"
+                >
+                  {achievement.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button 
+        id="prevButton" 
+        class="absolute h-full w-12 top-1/2 left-0 transform -translate-y-1/2 text-white p-2 transition-all duration-300 group hover:bg-gradient-to-r hover:from-black hover:to-transparent hover:scale-150 bg-opacity-40"
+      >
+        &#8249;
+      </button>
+      <button 
+        id="nextButton" 
+        class="absolute h-full w-12 top-1/2 right-0 transform -translate-y-1/2 text-white p-2 transition-all duration-300 group hover:bg-gradient-to-l hover:from-black hover:to-transparent hover:scale-150 bg-opacity-40"
+      >
+        &#8250;
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  let currentIndex = 0;
+  const carousel = document.getElementById('carousel');
+  const prevButton = document.getElementById('prevButton');
+  const nextButton = document.getElementById('nextButton');
+  const achievementsElement = document.querySelector('#achievements') as HTMLElement | null;
+  const achievementsLength = achievementsElement ? parseInt(achievementsElement.dataset.achievementslength ?? '0') : 0;
+
+  const updateCarousel = () => {
+    if (!carousel) return;
+    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+  };
+
+  if (prevButton) {
+    prevButton.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + achievementsLength) % achievementsLength;
+      updateCarousel();
+    });
+  }
+
+  if (nextButton) {
+    nextButton.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % achievementsLength;
+      updateCarousel();
+    });
+  }
+</script>
