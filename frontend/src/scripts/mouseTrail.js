@@ -5,11 +5,11 @@ const artworkImages = JSON.parse(document.querySelector('#gallery').dataset.imag
 
 window.addEventListener("load", () => {
 
-    LegendaryCursor.init({
-        lineSize: 0.1,
-        texture1: artworkImages[0],
-        texture2: artworkImages[1 % artworkImages.length], 
-        texture3: artworkImages[2 % artworkImages.length],
-    });
+    // LegendaryCursor.init({
+    //     lineSize: 0.1,
+    //     texture1: artworkImages[0],
+    //     texture2: artworkImages[1 % artworkImages.length], 
+    //     texture3: artworkImages[2 % artworkImages.length],
+    // });
 
 });
