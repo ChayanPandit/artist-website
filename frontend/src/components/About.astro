@@ -1,24 +1,19 @@
 ---
+const { aboutme } = Astro.props;
 ---
 
-<section id="about" class="py-20 bg-gray-50">
+<section id="about" class="py-20 bg-gray-100 max-w-5xl mx-auto px-8">
   <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold mb-12 text-center">About the Artist</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <h2 class="text-4xl font-bold mb-12 text-center">About Me</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center">
       <img 
-        src="/artist-portrait.jpg" 
+        src={aboutme.image} 
         alt="Artist portrait" 
-        class="w-full h-[500px] object-cover rounded-lg"
+        class="w-32 h-32 md:w-full md:h-[500px] object-cover rounded-full md:rounded-lg mx-auto"
       />
       <div>
-        <p class="text-lg mb-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae justo vel metus 
-          consectetur dignissim. Fusce vehicula, neque ac efficitur consequat, massa nunc 
-          hendrerit nunc, in blandit nunc tellus sit amet libero.
-        </p>
-        <p class="text-lg mb-6">
-          Praesent euismod augue vitae ligula pulvinar, eu finibus velit placerat. 
-          Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <p class="md:text-lg mb-6 text-center">
+          {aboutme.description}
         </p>
       </div>
     </div>

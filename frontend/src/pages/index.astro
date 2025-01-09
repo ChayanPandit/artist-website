@@ -30,19 +30,27 @@ const ACHIEVEMENTS_QUERY = `*[_type == "achievement"] {
   "createdAt": _createdAt,
   "image": image.asset->url,
 } | order(createdAt desc)`;
+
+const ABOUTME_QUERY = `*[_type == "aboutme"] {
+  "id": _id,
+  name,
+  moto,
+  description,
+  "createdAt": _createdAt,
+  "image": image.asset->url,
+}`;
   
 const allArtworks = await sanityClient.fetch<SanityDocument[]>(ARTWORKS_QUERY) as unknown as Artwork[];
 const allAchievements = await sanityClient.fetch<SanityDocument[]>(ACHIEVEMENTS_QUERY);
-
-console.log("allachievements", allAchievements)
+const allAboutMes = await sanityClient.fetch<SanityDocument[]>(ABOUTME_QUERY);
 ---
 
 <Layout title="Artist Portfolio">
   <Navigation />  
-  <Hero/>
+  <Hero aboutme={allAboutMes[0]}/>
   <Gallery artworks={allArtworks} client:load/>
   <Achievements achievements={allAchievements}/>
-  <About/>
+  <About aboutme={allAboutMes[0]}/>
   <Contact/>
   <Footer/>
 </Layout>
