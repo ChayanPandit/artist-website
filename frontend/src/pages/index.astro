@@ -20,7 +20,8 @@ const ARTWORKS_QUERY = `*[_type == "artwork"] {
     sold,
     "createdAt": _createdAt,
     "image": image.asset->url,
-    tags
+    tags,
+    price
 } | order(_createdAt asc)`;
   
 const ACHIEVEMENTS_QUERY = `*[_type == "achievement"] {

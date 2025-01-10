@@ -8,13 +8,15 @@ interface ArtworkCardProps {
 }
 
 const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork }) => {
-  const { image, title, description, inspiration, tags } = artwork;
+  const { image, title, description, inspiration, tags, sold, price, createdAt } = artwork;
   const [isOpen, setIsOpen] = useState(false);
   const [screenDimensions, setScreenDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    const width = Math.floor(window.innerWidth * 0.8);
-    const height = Math.floor(window.innerHeight * 0.9);
+    const md_breakpoint = 768;
+    const w_96 = 384;
+    const width = Math.floor(window.innerWidth * 0.95 - (window.innerWidth > md_breakpoint ? w_96 : 0));
+    const height = Math.floor(window.innerHeight * 0.95);
     setScreenDimensions({ width, height });
   }, []);
 
@@ -41,7 +43,7 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork }) => {
           onClick={() => setIsOpen(false)} 
         >
           <div
-            className="flex flex-col gap-2 md:flex-row bg-white rounded-lg w-auto h-auto max-w-full max-h-screen p-4 relative m-4 overflow-y-auto"
+            className="max-w-screen md:flex bg-white rounded-lg max-h-screen p-4 relative m-4 md:overflow-visible overflow-y-auto"
             onClick={(e) => e.stopPropagation()} 
           >
             <button
@@ -51,50 +53,51 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork }) => {
               ✕
             </button>
 
-            <div className="w-full md:w-3/5 h-auto flex items-center justify-center">
-              <InnerImageZoom
-                src={`${image}?sharp=30&fit=clip&w=${screenDimensions.width}&h=${screenDimensions.height}&q=80`}
-                zoomSrc={`${image}?sharp=60&q=100`}
-                hasSpacer
-                zoomPreload
-                fullscreenOnMobile
-                mobileBreakpoint={1080}
-              />
+            <InnerImageZoom
+              className="w-full md:w-auto"
+              src={`${image}?sharp=30&fit=fill&w=${screenDimensions.width}&h=${screenDimensions.height}&q=80`}
+              zoomSrc={`${image}?sharp=60&q=100`}
+              hasSpacer
+              zoomPreload
+              fullscreenOnMobile
+              mobileBreakpoint={1080}
+            />
+
+            <div className="max-h-96 md:h-auto md:w-96 flex flex-col p-4 gap-4 justify-between">
+              <h2 className="text-2xl font-bold">{title}</h2>
+              <div className="flex flex-col gap-4 overflow-y-auto ">                 
+                <p className="text-gray-700 text-wrap whitespace-pre-wrap break-words">{inspiration}</p>
+
+                <p className="text-gray-700 text-wrap whitespace-pre-wrap break-words">{description}</p>
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <div className="text-gray-700 font-semibold">
+                  <p>Status: {sold ? "Sold" : "Available for Sale"}</p>
+                  {sold ? (
+                    <p>Price Sold: ${price || "0"}</p>
+                  ) : (
+                    <p>Minimum Price: ${price || "0"}</p>
+                  )}
+                </div>
+
+                {tags && tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="bg-gray-200 text-gray-600 text-sm px-2 py-1 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <p className="text-gray-500 text-sm">Created on: {new Date(createdAt).toLocaleDateString()}</p>
             </div>
 
-            <div className="w-full md:w-2/5 h-auto flex flex-col justify-start p-4">
-              <h2 className="text-2xl font-bold">{title}</h2>
-              <p className="mt-2 text-gray-700">
-                {description}
-                erhgdfdhjr
-                ghjhhgtehjhehmhjh
-                erhgdfdhjr
-                ghjhhgtehjhehmhjh
-                erhgdfdhjr
-                ghjhhgtehjhehmhjh
-              </p>
-              <p className="mt-4 text-gray-700">
-                {inspiration}
-                erhgdfdhjr
-                ghjhhgtehjhehmhjh
-                erhgdfdhjr
-                ghjhhgtehjhehmhjh
-                erhgdfdhjr
-                ghjhhgtehjhehmhjh
-              </p>
-              {tags && (
-                <div className="mt-4">
-                  {tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="inline-block bg-gray-200 text-gray-600 text-sm px-2 py-1 rounded mr-2"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
         </div>
       )}

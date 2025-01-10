@@ -4,8 +4,8 @@ export type Artwork = {
   image: string;
   description: string;
   inspiration: string;
-  category: string;
-  dimensions?: string;
-  medium?: string;
+  sold: boolean;
+  price: number;
   tags?: string[];
+  createdAt: Date;
 }
